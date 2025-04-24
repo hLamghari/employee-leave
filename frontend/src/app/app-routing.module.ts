@@ -6,6 +6,7 @@ import { AccountDetailComponent } from './views/pages/account-detail/account-det
 import { TransferFormComponent } from './views/pages/transfer-form/transfer-form.component';
 import { LoginComponent } from './views/pages/login/login.component';
 import { NotFoundComponent } from './views/pages/not-found/not-found.component';
+import { AuthGuard } from './core/guard/auth.guard';
 
 
 const routes: Routes = [
@@ -13,9 +14,9 @@ const routes: Routes = [
     path: '',
     component: ContentComponent,
     children: [
-      { path: 'accounts', component: AccountListComponent },
-      { path: 'accounts/:id', component: AccountDetailComponent },
-      { path: 'transfer', component: TransferFormComponent },
+      { path: 'accounts', component: AccountListComponent, canActivate: [AuthGuard] },
+      { path: 'accounts/:id', component: AccountDetailComponent, canActivate: [AuthGuard] },
+      { path: 'transfer', component: TransferFormComponent, canActivate: [AuthGuard] },
       { path: 'login', component: LoginComponent },
       { path: '404', component: NotFoundComponent },
       { path: '', redirectTo: 'accounts', pathMatch: 'full' }
