@@ -1,0 +1,56 @@
+<ng-template [ngIf]="isLoading">
+    <app-loading></app-loading>
+  </ng-template>
+  
+  <ng-template [ngIf]="loadingError">
+    <app-loading-error></app-loading-error>
+  </ng-template>
+  
+  <ng-template [ngIf]="authError">
+    <app-auth-error></app-auth-error>
+  </ng-template>
+  
+  <ng-container *ngIf="!isLoading && !loadingError && !authError && account">
+    <div class="flex justify-center items-center min-h-screen bg-gray-50">
+      <div class="bg-white rounded-lg shadow-lg p-10 w-full max-w-xl">
+        <h2 class="text-4xl font-bold mb-10 text-blue-700 flex items-center">
+          <svg class="w-10 h-10 mr-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M3 10h18M3 6h18M3 14h18M3 18h18" />
+          </svg>
+          Account Details
+        </h2>
+        <dl>
+          <div class="mb-6">
+            <dt class="text-lg font-medium text-gray-500">Account Name</dt>
+            <dd class="text-2xl font-semibold text-gray-900">{{ account.nom }}</dd>
+          </div>
+          <div class="mb-6">
+            <dt class="text-lg font-medium text-gray-500">IBAN</dt>
+            <dd class="text-xl font-mono text-gray-700">{{ account.iban }}</dd>
+          </div>
+          <div class="mb-6">
+            <dt class="text-lg font-medium text-gray-500">Type</dt>
+            <dd>
+              <span *ngIf="account.type === 'COUTRANT'"
+                    class="inline-block bg-blue-100 text-blue-800 text-base px-3 py-1 rounded">Current</span>
+              <span *ngIf="account.type === 'EPARGNE'"
+                    class="inline-block bg-green-100 text-green-800 text-base px-3 py-1 rounded">Savings</span>
+            </dd>
+          </div>
+          <div class="mb-6">
+            <dt class="text-lg font-medium text-gray-500">Amount</dt>
+            <dd class="text-2xl font-bold text-green-700">{{ account.amount | currency }}</dd>
+          </div>
+          <div class="mb-6" *ngIf="account.type === 'EPARGNE'">
+            <dt class="text-lg font-medium text-gray-500">Interest Rate</dt>
+            <dd class="text-xl text-green-700">{{ account.tauxInteret }}%</dd>
+          </div>
+          <div class="mt-10 flex justify-end">
+            <a routerLink="/accounts" class="text-xl text-blue-600 hover:underline">← Back to accounts</a>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </ng-container>
+  
