@@ -20,6 +20,7 @@ export class AppRoutingModule { }
 
 <nav>
   <a routerLink="/employes">Liste des employés</a>
+  <a [routerLink]="['/employes', employe.id]">Voir détails</a>
   <a routerLink="/demande-conge">Demande de congé</a>
 </nav>
 <router-outlet></router-outlet>
