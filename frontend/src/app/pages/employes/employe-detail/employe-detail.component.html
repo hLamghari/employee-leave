@@ -1,0 +1,7 @@
+<div *ngIf="employe">
+    <h2>{{ employe.prenom }} {{ employe.nom }}</h2>
+    <p>Catégorie : {{ employe.categorie }}</p>
+    <p>Date d'embauche : {{ employe.dateEmbauche }}</p>
+    <p>Solde congés : {{ employe.soldeConges }}</p>
+    <p *ngIf="employe.soldeRTT">Solde RTT : {{ employe.soldeRTT }}</p>
+  </div>
