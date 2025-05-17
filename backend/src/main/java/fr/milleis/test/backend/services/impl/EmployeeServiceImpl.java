@@ -1,5 +1,9 @@
 package fr.milleis.test.backend.services.impl;
 
+import fr.milleis.test.backend.dto.mapper.LeaveMapper;
+import fr.milleis.test.backend.dto.response.EmployeeLeavesResponse;
+import fr.milleis.test.backend.dto.response.EmployeeResponse;
+import fr.milleis.test.backend.dto.mapper.EmployeeMapper;
 import fr.milleis.test.backend.entities.Employee;
 import fr.milleis.test.backend.repositories.EmployeeRepository;
 import fr.milleis.test.backend.services.EmployeeService;
@@ -12,18 +16,35 @@ import java.util.Optional;
 public class EmployeeServiceImpl implements EmployeeService {
 
     private final EmployeeRepository employeeRepository;
+    private final EmployeeMapper employeeMapper;
+    private final LeaveMapper leaveMapper;
 
-    public EmployeeServiceImpl(EmployeeRepository employeeRepository) {
+    public EmployeeServiceImpl(EmployeeRepository employeeRepository, EmployeeMapper employeeMapper, LeaveMapper leaveMapper) {
         this.employeeRepository = employeeRepository;
+        this.employeeMapper = employeeMapper;
+        this.leaveMapper = leaveMapper;
     }
 
     @Override
-    public List<Employee> getAllEmployes() {
-        return employeeRepository.findAll();
+    public List<EmployeeResponse> getAllEmployees() {
+        return employeeRepository.findAll().stream().map(employee -> {
+            return employee.isExecutive() ? employeeMapper.toExecutiveEmployee(employee) : employeeMapper.toNonExecutiveEmployee(employee);
+        }).toList();
     }
 
     @Override
-    public Optional<Employee> getEmployeById(Long id) {
+    public Optional<EmployeeResponse> getEmployeeById(Long id) {
+        return getById(id).map(employee ->
+                employee.isExecutive() ? employeeMapper.toExecutiveEmployee(employee) : employeeMapper.toNonExecutiveEmployee(employee));
+    }
+
+    @Override
+    public Optional<Employee> getById(Long id) {
         return employeeRepository.findById(id);
+    }
+
+    @Override
+    public Optional<EmployeeLeavesResponse> getEmployeeLeaves(Long id) {
+        return getById(id).map(employee -> EmployeeLeavesResponse.builder().id(id).leaves(employee.getLeaves().stream().map(leaveMapper::toLeaveDto).toList()).build());
     }
 }

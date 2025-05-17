@@ -1,5 +1,8 @@
 package fr.milleis.test.backend.exceptions.response;
 
+import lombok.Builder;
+
+@Builder
 public class ErrorResponse {
     private String code;
     private String message;

@@ -1,79 +1,40 @@
 package fr.milleis.test.backend.entities;
 
-import fr.milleis.test.backend.enums.Categorie;
+import fr.milleis.test.backend.enums.Category;
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
+@Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@Table(name = "employee")
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String nom;
-    private String prenom;
+    private String lastName;
+    private String firstName;
 
     @Enumerated(EnumType.STRING)
-    private Categorie categorie;
+    private Category category;
 
-    private LocalDate dateEmbauche;
-    private BigDecimal soldeConges;
-    private BigDecimal soldeRTT;
+    private LocalDate dateHiring;
+    private BigDecimal saleLeave;
+    @Column(name = "sale_rtt")
+    private BigDecimal saleRTT;
 
-    public Long getId() {
-        return id;
+    @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY)
+    private List<Leave> leaves;
+
+    public boolean isExecutive () {
+        return Category.CADRE.equals(category);
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNom() {
-        return nom;
-    }
-
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    public String getPrenom() {
-        return prenom;
-    }
-
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
-    }
-
-    public Categorie getCategorie() {
-        return categorie;
-    }
-
-    public void setCategorie(Categorie categorie) {
-        this.categorie = categorie;
-    }
-
-    public LocalDate getDateEmbauche() {
-        return dateEmbauche;
-    }
-
-    public void setDateEmbauche(LocalDate dateEmbauche) {
-        this.dateEmbauche = dateEmbauche;
-    }
-
-    public BigDecimal getSoldeConges() {
-        return soldeConges;
-    }
-
-    public void setSoldeConges(BigDecimal soldeConges) {
-        this.soldeConges = soldeConges;
-    }
-
-    public BigDecimal getSoldeRTT() {
-        return soldeRTT;
-    }
-
-    public void setSoldeRTT(BigDecimal soldeRTT) {
-        this.soldeRTT = soldeRTT;
-    }
 }

@@ -1,6 +1,6 @@
 package fr.milleis.test.backend.enums;
 
-public enum TypeConge {
+public enum LeaveType {
     CONGE_PAYE,
     RTT,
     SANS_SOLDE

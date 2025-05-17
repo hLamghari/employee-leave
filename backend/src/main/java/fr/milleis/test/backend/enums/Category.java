@@ -1,6 +1,6 @@
 package fr.milleis.test.backend.enums;
 
-public enum Categorie {
+public enum Category {
     CADRE,
     NON_CADRE
 }
