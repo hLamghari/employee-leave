@@ -4,4 +4,5 @@
     <p>Date d'embauche : {{ employe.dateEmbauche }}</p>
     <p>Solde congés : {{ employe.soldeConges }}</p>
     <p *ngIf="employe.soldeRTT">Solde RTT : {{ employe.soldeRTT }}</p>
-  </div>
+    <conge-list [emplyeeId]="employe.id"></conge-list>
+</div>

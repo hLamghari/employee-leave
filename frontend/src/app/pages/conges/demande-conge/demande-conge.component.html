@@ -1,14 +1,15 @@
 <form [formGroup]="form" (ngSubmit)="submit()">
-    <label>ID Employé : <input formControlName="employeId" /></label><br />
-    <label>Date Début : <input type="date" formControlName="dateDebut" /></label><br />
-    <label>Date Fin : <input type="date" formControlName="dateFin" /></label><br />
+    <label>ID Employé : <input formControlName="employeeId" /></label><br />
+    <label>Date Début : <input type="date" formControlName="startDate" /></label><br />
+    <label>Date Fin : <input type="date" formControlName="endDate" /></label><br />
     <label>Type :
-      <select formControlName="typeConge">
+      <select formControlName="leaveType">
         <option value="CONGE_PAYE">Congé payé</option>
         <option value="RTT">RTT</option>
         <option value="SANS_SOLDE">Sans solde</option>
       </select>
     </label><br />
     <button type="submit">Envoyer</button>
+    <button (click)="init()">Réinitialiser</button>
   </form>
   <p>{{ message }}</p>

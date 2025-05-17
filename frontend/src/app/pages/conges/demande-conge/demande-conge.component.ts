@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { CongeService } from '../../../core/services/conge.service';
-import { CongeRequest } from '../../../core/models/conge-request.model';
+import { CongeService } from '@services/conge.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -13,19 +12,26 @@ export class DemandeCongeComponent {
 
   constructor(private fb: FormBuilder, private congeService: CongeService) {
     this.form = this.fb.group({
-      employeId: [null, Validators.required],
-      dateDebut: ['', Validators.required],
-      dateFin: ['', Validators.required],
-      typeConge: ['', Validators.required],
+      employeeId: [null, Validators.required],
+      startDate: ['', Validators.required],
+      endDate: ['', Validators.required],
+      leaveType: ['', Validators.required],
     });
   }
 
   submit(): void {
     if (this.form.valid) {
       this.congeService.demanderConge(this.form.value).subscribe({
-        next: () => this.message = 'Demande envoyée avec succès !',
-        error: err => this.message = err.error.message || 'Erreur inconnue'
+        next: () => {
+          this.message = 'Demande envoyée avec succès !';
+          this.init();
+        },
+        error: err => this.message =  "Erreur : " + err.error.message || 'Erreur inconnue'
       });
     }
+  }
+
+  init(): void {
+    this.form.reset()
   }
 }

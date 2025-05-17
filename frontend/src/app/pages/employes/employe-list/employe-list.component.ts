@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { EmployeService } from '../../../core/services/employe.service';
-import { Employe } from '../../../core/models/employe.model';
+import { EmployeService } from '../../../services/employe.service';
+import { Employe } from '../../../models/employe.model';
 
 @Component({
   selector: 'app-employe-list',
@@ -14,8 +14,11 @@ export class EmployeListComponent implements OnInit {
 
   ngOnInit(): void {
     this.employeService.getAllEmployes().subscribe(data => {
+      console.log(data);
       this.cadres = data.filter(e => e.categorie === 'CADRE');
       this.nonCadres = data.filter(e => e.categorie === 'NON_CADRE');
+      console.log(this.cadres);
+      console.log(this.nonCadres);
     });
   }
 }
