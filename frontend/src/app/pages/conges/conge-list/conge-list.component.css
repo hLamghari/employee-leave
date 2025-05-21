@@ -1,0 +1,12 @@
+table {
+    margin-top: 10px;
+}
+
+table td, th {
+    border: 1px solid wheat;
+    padding: 10px;
+}
+
+table th {
+    background-color: rgb(252, 243, 232)
+}

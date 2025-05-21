@@ -1,0 +1,23 @@
+<div *ngIf="leaves.length > 0; else noLeaves">
+    <h3>Liste de congés</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Start date</th>
+                <th>End date</th>
+                <th>Type</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let leave of leaves">
+                <td>{{ leave.startDate }}</td>
+                <td>{{ leave.endDate }}</td>
+                <td>{{ leave.leaveType }}</td>
+            </tr>
+        </tbody>
+        
+    </table>
+</div>
+<ng-template #noLeaves>
+    <p>Aucun congés</p>
+</ng-template>

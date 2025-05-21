@@ -1,0 +1,34 @@
+.header {
+  background-color: #333;
+  color: white;
+  padding: 1rem;
+}
+
+nav ol {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+
+nav ol {
+    text-decoration: none;
+}
+
+nav a {
+    text-decoration: none;
+    margin: 5px;
+    color: #e4f2f6;
+}
+
+nav li a:hover {
+    //border-bottom: 1px solid #e1e1e9;
+    color: white;
+}
+
+nav li::before {
+    content: '|';
+}
+
+nav li:first-child::before {
+    content: '';
+}
