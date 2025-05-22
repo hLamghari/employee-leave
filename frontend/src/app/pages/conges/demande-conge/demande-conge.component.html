@@ -1,15 +1,19 @@
 <form [formGroup]="form" (ngSubmit)="submit()">
-    <label>ID Employé : <input formControlName="employeeId" /></label><br />
-    <label>Date Début : <input type="date" formControlName="startDate" /></label><br />
-    <label>Date Fin : <input type="date" formControlName="endDate" /></label><br />
+    <label>ID Employé : <input formControlName="employeeId" /></label>
+    <span class="error">{{ form.get('employeeId')?.errors && form.get('employeeId')?.touched ? 'L\'id de l\'employé est requis' : ''}}</span>
+    <label>Date Début : <input type="date" formControlName="startDate" /></label>
+    <span class="error">{{ form.get('startDate')?.errors && form.get('startDate')?.touched ? 'La date de début est requise' : ''}}</span>
+    <label>Date Fin : <input type="date" formControlName="endDate" /></label>
+    <span class="error">{{ form.get('endDate')?.errors && form.get('endDate')?.touched ? 'La date de fin est requise' : ''}}</span>
     <label>Type :
       <select formControlName="leaveType">
         <option value="CONGE_PAYE">Congé payé</option>
         <option value="RTT">RTT</option>
         <option value="SANS_SOLDE">Sans solde</option>
       </select>
-    </label><br />
-    <button type="submit">Envoyer</button>
-    <button (click)="init()">Réinitialiser</button>
+    </label>
+    <span class="error">{{ form.get('leaveType')?.errors && form.get('leaveType')?.touched ? 'Le type de congé est requis' : ''}}</span>
+    <button type="submit" [disabled]="form.invalid">Envoyer</button>
+    <button type="button" (click)="init()">Réinitialiser</button>
   </form>
-  <p>{{ message }}</p>
+  <p [ngClass]="error ? 'error' : ''">{{ message }}</p>
