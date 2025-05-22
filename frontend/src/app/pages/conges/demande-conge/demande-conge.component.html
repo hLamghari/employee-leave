@@ -1,10 +1,10 @@
 <form [formGroup]="form" (ngSubmit)="submit()">
     <label>ID Employé : <input formControlName="employeeId" /></label>
-    <span class="error">{{ form.get('employeeId')?.errors && form.get('employeeId')?.touched ? 'L\'id de l\'employé est requis' : ''}}</span>
+    <span class="error">{{ errorMessage('employeeId') }}</span>
     <label>Date Début : <input type="date" formControlName="startDate" /></label>
-    <span class="error">{{ form.get('startDate')?.errors && form.get('startDate')?.touched ? 'La date de début est requise' : ''}}</span>
+    <span class="error">{{ errorMessage('startDate') }}</span>
     <label>Date Fin : <input type="date" formControlName="endDate" /></label>
-    <span class="error">{{ form.get('endDate')?.errors && form.get('endDate')?.touched ? 'La date de fin est requise' : ''}}</span>
+    <span class="error">{{ errorMessage('endDate') }}</span>
     <label>Type :
       <select formControlName="leaveType">
         <option value="CONGE_PAYE">Congé payé</option>
@@ -12,7 +12,7 @@
         <option value="SANS_SOLDE">Sans solde</option>
       </select>
     </label>
-    <span class="error">{{ form.get('leaveType')?.errors && form.get('leaveType')?.touched ? 'Le type de congé est requis' : ''}}</span>
+    <span class="error">{{ errorMessage('leaveType') }}</span>
     <button type="submit" [disabled]="form.invalid">Envoyer</button>
     <button type="button" (click)="init()">Réinitialiser</button>
   </form>

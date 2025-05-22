@@ -42,4 +42,13 @@ export class DemandeCongeComponent {
   init(): void {
     this.form.reset()
   }
+
+  errorMessage(control: string): string {
+    return (
+      this.form.get(control)?.errors?.['required'] 
+      && this.form.get(control)?.touched 
+      && 'Veuillez remplir ce champs'
+    ) 
+    || ''
+  }
 }
